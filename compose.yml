@@ -1,0 +1,66 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - 127.0.0.1:9900:9900
+
+    volumes:
+      - ./backend:/app
+
+    environment:
+      - DATABASE_URL=postgresql://elastic-example:elastic-example@database:5432/elastic-example-db
+      - ADDRESS=:9900
+
+    depends_on:
+      - database
+      - elastic
+
+    networks:
+      - elastic
+
+  database:
+    image: "postgres:latest"
+    environment:
+      - POSTGRES_USER=elastic-example
+      - POSTGRES_PASSWORD=elastic-example
+      - POSTGRES_DB=elastic-example-db
+
+    ports:
+      - 127.0.0.1:5432:5432
+
+    networks:
+      - elastic
+
+  elastic:
+    image: "elasticsearch:9.4.2"
+    environment:
+      - discovery.type=single-node
+
+    ports:
+      - 127.0.0.1:9200:9200
+      - 127.0.0.1:9300:9300
+
+    networks:
+      - elastic
+
+  prometheus:
+    image: prom/prometheus:latest
+
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+    ports:
+      - 127.0.0.1:9090:9090
+
+    depends_on:
+      - backend
+
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    driver: bridge
