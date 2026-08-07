@@ -1,4 +1,4 @@
-import CarEntity from "./domain/entities/car.js";
+import CarEntity from "./domain/entities/Car.js";
 
 const car = CarEntity.create({
   model: "Monza",

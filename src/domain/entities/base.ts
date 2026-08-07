@@ -1,3 +1,6 @@
+import { randomUUID } from 'crypto'
+import type { ID } from './Types.js';
+
 class BaseEntity {
   public constructor(
     private _createdAt: Date = new Date(),
