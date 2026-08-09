@@ -1,4 +1,5 @@
 import CarEntity from "./domain/entities/Car.js";
+import { appErrorFactory } from "./utils/errors/factories/AppErrorFactoryFactory.js";
 
 const car = CarEntity.create({
   model: "Monza",
@@ -8,3 +9,11 @@ const car = CarEntity.create({
 });
 
 console.log(car);
+
+const { code, message } = appErrorFactory.createUnprocessableEntityError('Request cannot be processed now.');
+
+
+console.table({
+  code,
+  message,
+})

@@ -2,41 +2,43 @@ import { describe, test } from 'vitest'
 import { HttpAppErrorFactory } from './HttpAppErrorFactory.js'
 
 describe('http app error factory test suite', () => {
+  const appErrorFactory = new HttpAppErrorFactory();
+
   test('internal server error', (t) => {
-    const appError = HttpAppErrorFactory.createInternalServerError('internal error')
+    const appError = appErrorFactory.createInternalError('internal error')
     t.expect(appError.code).toBe(500);
     t.expect(appError.message).toBe('internal error')
   })
 
   test('bad request error', (t) => {
-    const appError = HttpAppErrorFactory.createBadRequestError('bad request error')
+    const appError = appErrorFactory.createBadRequestError('bad request error')
     t.expect(appError.code).toBeTruthy();
     t.expect(appError.code).toBe(400)
     t.expect(appError.message).toBe('bad request error')
   })
 
   test('not found error', (t) => {
-    const appError = HttpAppErrorFactory.createNotFoundError('not found error')
+    const appError = appErrorFactory.createNotFoundError('not found error')
     t.expect(appError.code).toBeTruthy();
     t.expect(appError.code).toBe(404)
     t.expect(appError.message).toBe('not found error')
   })
 
   test('forbidden error', (t) => {
-    const appError = HttpAppErrorFactory.createForbiddenError('forbidden error')
+    const appError = appErrorFactory.createForbiddenError('forbidden error')
     t.expect(appError.code).toBeTruthy();
     t.expect(appError.code).toBe(403)
     t.expect(appError.message).toBe('forbidden error')
   })
 
   test('unprocessable entity error', (t) => {
-    const appError = HttpAppErrorFactory.createUnprocessableEntityError('could not process request')
+    const appError = appErrorFactory.createUnprocessableEntityError('could not process request')
     t.expect(appError.code).toBe(422);
     t.expect(appError.message).toBe('could not process request')
   })
 
   test('unsupported media type error', (t) => {
-    const appError = HttpAppErrorFactory.createUnsupportedMediaTypeError('unsupported media type')
+    const appError = appErrorFactory.createUnsupportedMediaTypeError('unsupported media type')
     t.expect(appError.code).toBe(415);
     t.expect(appError.message).toBe('unsupported media type')
   })
