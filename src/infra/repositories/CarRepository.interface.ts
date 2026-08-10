@@ -1,5 +1,4 @@
 import type CarEntity from "../../domain/entities/car/Car.js";
-import type { ID } from "../../domain/entities/Types.js";
 
 export interface FindInput {
   model?: string;
@@ -16,10 +15,10 @@ export interface ICarRepository extends ICarQueryRepository, ICarExecuteReposito
 
 export interface ICarQueryRepository {
   find(input: FindInput): Promise<CarEntity[]>;
-  findById(carId: ID): Promise<CarEntity>;
+  findById(carId: string): Promise<CarEntity>;
 }
 
 export interface ICarExecuteRepository {
-  save(car: CarEntity): Promise<ID>;
-  remove(carId: ID): Promise<void>;
+  save(car: CarEntity): Promise<string>;
+  remove(carId: string): Promise<void>;
 }

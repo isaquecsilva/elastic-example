@@ -1,36 +1,33 @@
 import { Client } from "@elastic/elasticsearch";
 import type { ICarExecuteRepository } from "../CarRepository.interface.js";
 import type CarEntity from "../../../domain/entities/car/Car.js";
-import type { ID } from "../../../domain/entities/Types.js";
 
 class ElasticSearchCarExecuteRepository implements ICarExecuteRepository {
   constructor(
     private readonly client: Client,
     private readonly index: string,
-  ) { }
+  ) {}
 
-  public async save(car: CarEntity): Promise<ID> {
-    const { id, model, brand, year, price } = car;
-
+  public async save(car: CarEntity): Promise<string> {
     await this.client.index({
       index: this.index,
-      id: id,
+      id: car.getId(),
       document: {
-        id,
-        model,
-        brand,
-        year,
-        price,
-        createdAt: car.createdAt,
-        updatedAt: car.updatedAt,
-      }
+        id: car.getId(),
+        model: car.getModel(),
+        brand: car.getBrand(),
+        year: car.getYear(),
+        price: car.getPrice(),
+        createdAt: car.getCreatedAt(),
+        updatedAt: car.getUpdatedAt(),
+      },
     });
 
-    return car.id;
+    return car.getId();
   }
 
-  public async remove(carId: ID): Promise<void> {
-    await this.client.delete({ id: carId, index: this.index })
+  public async remove(carId: string): Promise<void> {
+    await this.client.delete({ id: carId, index: this.index });
   }
 }
 

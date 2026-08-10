@@ -4,7 +4,6 @@ import type {
   ICarQueryRepository,
 } from "../CarRepository.interface.js";
 import CarEntity from "../../../domain/entities/car/Car.js";
-import type { ID } from "../../../domain/entities/Types.js";
 
 class ElasticSearchCarQueryRepository implements ICarQueryRepository {
   constructor(
@@ -12,7 +11,7 @@ class ElasticSearchCarQueryRepository implements ICarQueryRepository {
     private readonly index: string = "cars",
   ) {}
 
-  public async findById(carId: ID): Promise<CarEntity> {
+  public async findById(carId: string): Promise<CarEntity> {
     const response = await this.client.get<CarEntity>({
       index: this.index,
       id: carId,
