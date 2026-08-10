@@ -3,7 +3,7 @@ import type {
   FindInput,
   ICarQueryRepository,
 } from "../CarRepository.interface.js";
-import CarEntity from "../../../domain/entities/Car.js";
+import CarEntity from "../../../domain/entities/car/Car.js";
 import type { ID } from "../../../domain/entities/Types.js";
 
 class ElasticSearchCarQueryRepository implements ICarQueryRepository {

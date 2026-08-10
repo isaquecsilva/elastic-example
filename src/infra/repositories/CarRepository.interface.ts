@@ -1,4 +1,4 @@
-import type CarEntity from "../../domain/entities/Car.js";
+import type CarEntity from "../../domain/entities/car/Car.js";
 import type { ID } from "../../domain/entities/Types.js";
 
 export interface FindInput {

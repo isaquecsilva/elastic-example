@@ -1,6 +1,6 @@
 import { Client } from "@elastic/elasticsearch";
 import type { ICarExecuteRepository } from "../CarRepository.interface.js";
-import type CarEntity from "../../../domain/entities/Car.js";
+import type CarEntity from "../../../domain/entities/car/Car.js";
 import type { ID } from "../../../domain/entities/Types.js";
 
 class ElasticSearchCarExecuteRepository implements ICarExecuteRepository {
