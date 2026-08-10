@@ -21,6 +21,8 @@ class PrismaCarRepository implements ICarRepository {
       brand: car.brand,
       year: car.year,
       price: car.price,
+      createdAt: car.createdAt,
+      updatedAt: car.updatedAt,
     });
 
     return carEntity;
@@ -57,6 +59,8 @@ class PrismaCarRepository implements ICarRepository {
         brand: car.brand,
         year: car.year,
         price: car.price,
+        createdAt: car.createdAt,
+        updatedAt: car.updatedAt,
       }),
     );
 
