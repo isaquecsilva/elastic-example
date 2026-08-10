@@ -1,5 +1,6 @@
 import { describe, test, assert } from "vitest";
 import CarEntity from "./Car.js";
+import { InvalidCarPriceError } from "./CarErrors.js";
 
 describe("Car entity test suite", () => {
   test("valid entity instance", (t) => {
@@ -12,9 +13,9 @@ describe("Car entity test suite", () => {
 
     const car = CarEntity.create(input);
     t.expect(car).toBeInstanceOf(CarEntity);
-    t.expect(car.id).toBeTruthy();
-    t.expect(car.model).toBeTruthy();
-    t.expect(car.brand).toBeTruthy();
+    t.expect(car.getId()).toBeTruthy();
+    t.expect(car.getModel()).toBeTruthy();
+    t.expect(car.getBrand()).toBeTruthy();
   });
 
   test("zero price", (t) => {
@@ -25,7 +26,7 @@ describe("Car entity test suite", () => {
       price: 0,
     };
 
-    t.expect(() => CarEntity.create(input)).toThrow();
+    t.expect(() => CarEntity.create(input)).toThrow(InvalidCarPriceError);
   });
 
   test("negative price", (t) => {
@@ -36,6 +37,6 @@ describe("Car entity test suite", () => {
       price: -10,
     };
 
-    t.expect(() => CarEntity.create(input)).toThrow();
+    t.expect(() => CarEntity.create(input)).toThrow(InvalidCarPriceError);
   });
 });
