@@ -1,4 +1,4 @@
-import CarEntity from "./domain/entities/Car.js";
+import CarEntity from "./domain/entities/car/Car.js";
 import { appErrorFactory } from "./utils/errors/factories/AppErrorFactoryFactory.js";
 
 const car = CarEntity.create({
