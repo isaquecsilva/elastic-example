@@ -2,6 +2,7 @@ import { randomUUIDv7 } from "crypto";
 import { InvalidCarPriceError } from "./CarErrors.js";
 
 export interface CarProps {
+  id?: string;
   model: string;
   brand: string;
   year: number;
@@ -9,9 +10,11 @@ export interface CarProps {
 }
 
 class CarEntity {
-  private readonly id: string
+  private readonly createdAt: Date = new Date();
+  private readonly updatedAt: Date;
 
   private constructor(
+    private readonly id: string,
     private readonly model: string,
     private readonly brand: string,
     private readonly year: number,
@@ -41,8 +44,17 @@ class CarEntity {
     return this.price;
   }
 
-  public static create({ model, brand, year, price }: CarProps) {
-    return new CarEntity(model, brand, year, price);
+  public getCreatedAt(): Date {
+    return this.createdAt;
+  }
+
+  public getUpdatedAt(): Date {
+    return this.updatedAt;
+  }
+
+  public static create({ id, model, brand, year, price }: CarProps) {
+    id = id ?? randomUUIDv7();
+    return new CarEntity(id, model, brand, year, price);
   }
 
   private validate(): void {
