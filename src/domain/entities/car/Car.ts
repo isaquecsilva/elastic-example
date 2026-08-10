@@ -7,18 +7,19 @@ export interface CarProps {
   brand: string;
   year: number;
   price: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 class CarEntity {
-  private readonly createdAt: Date = new Date();
-  private readonly updatedAt: Date;
-
   private constructor(
     private readonly id: string,
     private readonly model: string,
     private readonly brand: string,
     private readonly year: number,
     private readonly price: number,
+    private readonly createdAt: Date = new Date(),
+    private readonly updatedAt: Date = new Date()
   ) {
     this.id = randomUUIDv7();
     this.validate();
