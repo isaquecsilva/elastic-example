@@ -1,4 +1,4 @@
-import type { CarProps } from "../../../entities/Car.js";
+import type { CarProps } from "../../../entities/car/Car.js";
 import type { IUseCase } from "../Usecase.interface.js";
 
 export type CreateCarInput = CarProps;
